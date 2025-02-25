@@ -1,6 +1,7 @@
 import 'package:blabla_project/model/ride/locations.dart';
 import 'package:blabla_project/screens/ride_pref/widgets/ride_pref_select_location.dart';
 import 'package:blabla_project/theme/theme.dart';
+import 'package:blabla_project/utils/animations_util.dart';
 import 'package:flutter/material.dart';
 
 class LocationInputField extends StatelessWidget {
@@ -32,11 +33,9 @@ class LocationInputField extends StatelessWidget {
         // implement navigate to search location full modal screen
         final Location? selectedLocation = await Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (ctx) => RidePrefSelectLocation(
-              onLocationSelected: (location) {
-                Navigator.pop(ctx, location); // Close dialog and return location
-              },
+          AnimationUtils.createBottomToTopRoute(
+            RidePrefSelectLocation(
+              onLocationSelected: onLocationSelected,
             ),
           ),
         );
