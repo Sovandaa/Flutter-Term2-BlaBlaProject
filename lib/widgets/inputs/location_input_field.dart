@@ -1,4 +1,5 @@
 import 'package:blabla_project/model/ride/locations.dart';
+import 'package:blabla_project/screens/ride_pref/widgets/ride_pref_select_location.dart';
 import 'package:blabla_project/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class LocationInputField extends StatelessWidget {
 
   // method to display the selected location or hint text
   String get selectedLocationLabel => initLocation != null
-      ? "${initLocation!.name}, ${initLocation!.country.name}"
+      ? "${initLocation!.name}"
       : hint;
 
   @override
@@ -27,8 +28,23 @@ class LocationInputField extends StatelessWidget {
         selectedLocationLabel,
         style: TextStyle( color: BlaColors.neutral)
       ),
-      onTap: () => {
-        // implement navigate to search screen and pass data back (selected location)
+      onTap: () async{
+        // implement navigate to search location full modal screen
+        final Location? selectedLocation = await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => RidePrefSelectLocation(
+              onLocationSelected: (location) {
+                Navigator.pop(ctx, location); // Close dialog and return location
+              },
+            ),
+          ),
+        );
+
+        // Return selected location
+        if (selectedLocation != null) {
+          onLocationSelected(selectedLocation);
+        }
       },
     );
   }
