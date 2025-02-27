@@ -1,3 +1,5 @@
+import 'package:blabla_project/screens/rides/rides_screen.dart';
+import 'package:blabla_project/utils/animations_util.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/ride_pref/ride_pref.dart';
@@ -27,6 +29,10 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
   onRidePrefSelected(RidePref ridePref) {
  
    // 1 - Navigate to the rides screen (with a buttom to top animation) 
+    Navigator.of(context)
+        .push(AnimationUtils.createBottomToTopRoute(RidesScreen(
+      initialRidePref: ridePref,
+    )));
     
   }
 
